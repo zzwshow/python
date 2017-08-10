@@ -1,3 +1,3 @@
 # python
 learn python
-new add words
+new add letters
