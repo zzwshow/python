@@ -10,7 +10,7 @@ class Dog:
         print('%s is eating %s'%(self.name,food))
 
 
-aa=Dog('zzw')
+aa=Dog('aaa')
 print(aa.eat())
 
 

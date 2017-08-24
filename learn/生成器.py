@@ -41,7 +41,7 @@ print cc
 
 import os
 
-filelist1=os.listdir('C:\\Users\\cals\\Desktop\\python\\flask\\learn3.5')
+filelist1=os.listdir('C:\\Users\\cals\\Desktop\\python\\FLASK\\learn3.5')
 filelist2=[i for i in filelist1 if i.endswith('txt')]
 print filelist2
 

@@ -1,7 +1,7 @@
 #coding=utf-8
 import os
 print(os.getcwd())
-#C:\Users\cals\Desktop\python\flask\learn3.5
+#C:\Users\cals\Desktop\python\FLASK\learn3.5
 #获取当前文件所在的完整目录路径
 #os.chdir()
 print(os.curdir)

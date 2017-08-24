@@ -38,20 +38,31 @@
 #
 # ###装饰器带有参数！
 
-def decorator_agument(text):  #接受装饰器的参数！
-	def decorator_func(func):  #接收将要被装饰的函数
-		def new_function(*args,**kwargs): #定义一个新的函数，并添加打印功能！可以接受任何参数！
-			print('%s ---%s()'%(text,func.__name__))
-			return func(*args,**kwargs) #返回传入进来的函数和参数！
-		return new_function #返回添加新功能后的函数对象
-	return decorator_func #返回装饰后的函数对象！
+# def decorator_agument(text):  #接受装饰器的参数！
+# 	def decorator_func(func):  #接收将要被装饰的函数
+# 		def new_function(*args,**kwargs): #定义一个新的函数，并添加打印功能！可以接受任何参数！
+# 			print('%s ---%s()'%(text,func.__name__))
+# 			return func(*args,**kwargs) #返回传入进来的函数和参数！
+# 		return new_function #返回添加新功能后的函数对象
+# 	return decorator_func #返回装饰后的函数对象！
+#
+# @decorator_agument('execute')
+# def add_inits(a,b):
+# 	return a*b
+#
+# print(add_inits(3,3))
+#####################################
 
-@decorator_agument('execute')
-def add_inits(a,b):
-	return a*b
+def log(func):
+	def wrapper(*args,**kw):
+		print('call %s()'% func.__name__)
+		return func(*args,**kw)
+	return wrapper
 
-print(add_inits(3,3))
-
+@log
+def now():
+	print('2015-3-25')
+	
 
 
 

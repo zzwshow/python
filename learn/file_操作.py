@@ -48,7 +48,7 @@
 
 # import os
 # import os.path
-# filename='C:/Users/cals/Desktop/python/flask/learn3.5/test.txt'
+# filename='C:/Users/cals/Desktop/python/FLASK/learn3.5/test.txt'
 # if os.path.isfile(filename):
 #     f1=open(filename,'a+')
 #
@@ -67,7 +67,7 @@
 # import os
 # import os.path
 #
-# filename = 'C:/Users/cals/Desktop/python/flask/learn3.5/test.txt'
+# filename = 'C:/Users/cals/Desktop/python/FLASK/learn3.5/test.txt'
 #
 # if os.path.isfile(filename):
 #     with open(filename,'a+',encoding='utf-8') as fff:
@@ -76,10 +76,12 @@
 #             if line != 'q' or line != 'quit':
 #                 fff.write(line+'\n')
 #             else:
-#                 break
 
 
-
+# for root,dirs,files in os.walk(r'C:\Users\cals\Desktop\a'):
+# 	f=open(file,'w')
+# 	for i in files:
+# 		print(os.path.join(root,i))
 
 
 
