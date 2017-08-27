@@ -10,8 +10,18 @@ manager=Manager(app)
 #1\使用flask_migrate，必须绑定app和db
 migrate = Migrate(app,db)
 
+
+
+
 #2\把MigrateCommand命令添加到管理器manager对象中
 manager.add_command('db',MigrateCommand)
+
+
+@manager.command
+def clearAlembic():
+    from flask_migrate import upgrade
+    from models import Alembic
+    Alembic.clear_A()
 
 
 
