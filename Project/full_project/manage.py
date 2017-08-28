@@ -4,7 +4,7 @@ from flask_script import Manager #导入实例管理器
 from flask_migrate import MigrateCommand,Migrate
 from exts import db #（flask_migrate)需要用到
 from full_project import app #将主程序实例导入进来，绑定给管理器！
-from models import User #导入数据库模型！
+from models import User,Question #导入数据库模型！
 
 
 
