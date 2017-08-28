@@ -12,12 +12,23 @@ app.config.from_object(config) #实例调用配置文件
 db.init_app(app) #初始化(app)
 app.config['PERMANENT_SESSION_LIFETINE'] = timedelta(days=7)
 
-
-
 ##首页
 @app.route('/')
 def index():
-    return render_template('index.html')
+    #从数据库中取出所有问答数据，并排序（最新提交的显示在最前面）
+    context = {
+        'questions':Question.query.order_by('-create_time').all()
+    }
+    #将字典返回给主页！
+    return render_template('index.html',**context)
+
+#定义问答详情页，根据用户请求的id判断要显示哪个问答详情！
+@app.route('/detail/<question_id>/')
+def datail(question_id):
+    return render_template('detail.html')
+
+
+
 
 
 ##登录页面
