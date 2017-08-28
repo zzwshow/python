@@ -29,6 +29,8 @@ def login():
         password=request.form.get('password')
         #从数据库中查找用户的输入是否存在（验证用户手机号和密码）
         user=User.query.filter(User.telephone==telephone,User.password==password).first()
+        # print(user.telephone)
+        # print(user.password)
 
         if user:
             # 将登录用户的id 放入session中！记录用户登录状态！
