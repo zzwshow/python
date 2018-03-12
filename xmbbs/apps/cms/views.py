@@ -10,7 +10,7 @@ bp = Blueprint("cms",__name__,url_prefix="/cms")  #蓝图url
 @bp.route('/')
 @Login_Required
 def index():
-	return "cms index"
+	return render_template("cms/cms_index.html")
 
 #登陆类视图
 class LoginView(views.MethodView):
