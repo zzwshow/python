@@ -1,4 +1,7 @@
 DEBUG = True
+import os
+
+SECRET_KEY = os.urandom(24)
 
 ###数据库
 
