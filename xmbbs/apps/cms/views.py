@@ -26,11 +26,7 @@ def logout():
 def profile():
 	return render_template("cms/cms_profile.html")
 
-
-
-
-
-#登陆类视图
+##登陆类视图
 class LoginView(views.MethodView):
 
 	def get(self,message=None):
@@ -56,10 +52,20 @@ class LoginView(views.MethodView):
 			message = form.errors.popitem()[1][0] #返回任意一项表单验证器定义的错误提示信息！
 			return self.get(message=message)
 
-#类视图url 添加到蓝图url中
+###修改密码类视图
+class RestPwdView(views.MethodView):
+	decorators = [Login_Required]  #类视图中使用decorators来添加装饰器（限制登录）
+	def get(self):
+		return render_template('cms/cms_restpwd.html')
+	def post(self):
+		pass
+
+
+
+##类视图url 添加到蓝图url中
 bp.add_url_rule('/login/',view_func=LoginView.as_view('login'))
-
-
+###修改密码
+bp.add_url_rule('/resetpwd/',view_func=RestPwdView.as_view('resetpwd'))
 
 
 
