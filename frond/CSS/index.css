@@ -1,0 +1,14 @@
+body{
+	background-image: url('images\\back.png');
+	background-repeat: no-repeat;
+	background-position: right top;
+	margin-right: 100px;
+}
+h1{
+	background-color: #6495ed;
+}
+
+p {
+	background-color:#e0ffff;
+}
+

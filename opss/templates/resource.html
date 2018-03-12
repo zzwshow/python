@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/resource.css') }}">
+{% endblock %}
+
+{% block title %}主机资源{% endblock %}
+
+{% block main %}
+<div class="add_form">
+    <div class="form_title">
+        <h3>添加主机</h3>
+    </div>
+            <form action="{{ url_for('Add_host') }}" method="post" >
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="主机名称" name="host_name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="公网地址" name="public_address">
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="私网地址" name="private_address">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="操作系统" name="os">
+            </div>
+            <div class="project_checkbox">
+                <label>项目：</label>
+                <label>众筹</label>
+                <input type="radio" value="1" name="select_project" />
+                <label>存管</label>
+                <input type="radio" value="2" name="select_project" />
+            </div>
+            <div class="form-group">
+                <textarea name="host_descriptions" class="form-control" rows="5" placeholder="主机描述"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" >确认添加</button>
+            </div>
+        </form>
+    <div class="form_title">
+    <h3>添加项目</h3>
+    </div>
+        <form action="{{ url_for('Add_project') }}" method="post">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="项目名称" name="project_name">
+            </div>
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="项目地区" name="project_area">
+            </div>
+            <div class="form-group">
+                <textarea name="project_descriptions" class="form-control" rows="5" placeholder="项目描述"></textarea>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary">确认添加</button>
+            </div>
+        </form>
+</div>
+
+<div class="resources_pool">
+    <h3 align="center">项目主机信息</h3>
+
+    <div class="btn-group btn-group-justified" role="group" aria-label="...">
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">众筹</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">存管</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Right</button>
+      </div>
+      <div class="btn-group" role="group">
+        <button type="button" class="btn btn-default">Right</button>
+      </div>
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

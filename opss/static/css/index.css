@@ -1,0 +1,14 @@
+.shouye{
+    padding-top: 10px;
+}
+.shouye .w {
+    width: 200px;
+    float: left;
+}
+
+.btn-group-justified{
+
+    width: 200px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
