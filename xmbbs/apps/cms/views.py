@@ -20,6 +20,15 @@ def logout():
 	del session[config.CMS_USER_ID]
 	return redirect(url_for('cms.login'))
 
+#个人中心
+@bp.route("/profile/")
+@Login_Required
+def profile():
+	return render_template("cms/cms_profile.html")
+
+
+
+
 
 #登陆类视图
 class LoginView(views.MethodView):
