@@ -1,4 +1,4 @@
-from flask import Blueprint,views,render_template,request,session,redirect,url_for
+from flask import Blueprint,views,render_template,request,session,redirect,url_for,g
 from .forms import LoginForm
 from .models import CMSUser
 from .decorators import Login_Required
@@ -11,6 +11,15 @@ bp = Blueprint("cms",__name__,url_prefix="/cms")  #蓝图url
 @Login_Required
 def index():
 	return render_template("cms/cms_index.html")
+
+#注销
+@bp.route('/logout/')
+@Login_Required
+def logout():
+	#session.clear()  #清除所有登录的用户
+	del session[config.CMS_USER_ID]
+	return redirect(url_for('cms.login'))
+
 
 #登陆类视图
 class LoginView(views.MethodView):
@@ -40,5 +49,12 @@ class LoginView(views.MethodView):
 
 #类视图url 添加到蓝图url中
 bp.add_url_rule('/login/',view_func=LoginView.as_view('login'))
+
+
+
+
+
+
+
 
 
