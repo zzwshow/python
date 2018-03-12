@@ -1,11 +1,14 @@
 from flask import Blueprint,views,render_template,request,session,redirect,url_for
 from .forms import LoginForm
 from .models import CMSUser
+from .decorators import Login_Required
+import config
 
 
 bp = Blueprint("cms",__name__,url_prefix="/cms")  #蓝图url
 
 @bp.route('/')
+@Login_Required
 def index():
 	return "cms index"
 
@@ -23,7 +26,7 @@ class LoginView(views.MethodView):
 			remember = form.password.data
 			user = CMSUser.query.filter_by(email=email).first() #验证email 是否存在
 			if user and user.check_password(password):
-				session["user_id"] = user.id    #验证成功后添加session 信息！用于以后判断用户是否登陆
+				session[config.CMS_USER_ID] = user.id    #验证成功后添加session 信息！用于以后判断用户是否登陆
 				if remember:
 					session.permanent = True  #session 过期时间为31天
 				return redirect(url_for('cms.index'))  #重定向的蓝图主页（一点要加蓝图名字）

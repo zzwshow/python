@@ -1,15 +1,15 @@
 from  flask import session,redirect,url_for
 from functools import wraps
+import config
 
 #登陆限制
 def Login_Required(func):
-
 	@wraps(func)
 	def inner(*args,**kwargs):
-		if "user_id" in session:
+		if config.CMS_USER_ID in session:
 			return func(*args,**kwargs)
 		else:
-			return redirect(url_for("cms.index"))
+			return redirect(url_for("cms.login"))
 	return inner
 
 
