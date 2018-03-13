@@ -4,7 +4,7 @@ from .views import bp
 import config
 
 
-#在返回cms主页前将用户信息绑定到g对象上供前端使用！
+#在返回cms主页前将用户信息绑定到g对象上供前端使用
 @bp.before_request
 def before_request():
 	if config.CMS_USER_ID in session:
