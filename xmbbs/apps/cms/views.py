@@ -1,7 +1,17 @@
-from flask import Blueprint,views,render_template,request,session,redirect,url_for,g
-from .forms import LoginForm
+from flask import (
+	Blueprint,
+	views,
+	render_template,
+	request,session,
+	redirect,
+	url_for,
+	g,
+	jsonify
+)
+from .forms import LoginForm,ResetPwdForm
 from .models import CMSUser
 from .decorators import Login_Required
+from exts import db
 import config
 
 
@@ -49,16 +59,34 @@ class LoginView(views.MethodView):
 				return self.get(message="邮箱或密码错误")
 
 		else:
-			message = form.errors.popitem()[1][0] #返回任意一项表单验证器定义的错误提示信息！
+			# message = form.errors.popitem()[1][0] #返回任意一项表单验证器定义的错误提示信息！
+			message = form.get_error()   #同上
 			return self.get(message=message)
 
 ###修改密码类视图
 class RestPwdView(views.MethodView):
 	decorators = [Login_Required]  #类视图中使用decorators来添加装饰器（限制登录）
 	def get(self):
-		return render_template('cms/cms_restpwd.html')
+		return render_template('cms/cms_resetpwd.html')
+
 	def post(self):
-		pass
+		form = ResetPwdForm(request.form)
+		if form.validate():
+			oldpwd = form.oldpwd.data
+			newpwd = form.newpwd.data
+			user = g.cms_user
+			if user.check_password(oldpwd):  #检查旧密码是否正确
+				user.password = newpwd
+				db.session.commit()
+				return jsonify({"code":200,"message":""})
+			else:
+				return jsonify({"code":400,"message":"旧密码错误"})
+
+		else:
+			message = form.get_error()   #获取表单验证器的错误提示
+			return jsonify({"code":400,"message":message})
+
+
 
 
 

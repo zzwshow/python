@@ -7,7 +7,7 @@ SECRET_KEY = os.urandom(24)
 
 # DB_URI = "mysql+pymysql://root:wei3511@127.0.0.1:3306/xmbbs_db?charset=utf8"
 
-DB_URI = "mysql+pymysql://root:wei3511@127.0.0.1:3306/xmbbs_db?charset=utf8"
+DB_URI = "mysql+pymysql://root:wei3511@127.0.0.1:3306/xmbbs_db1?charset=utf8"
 
 SQLALCHEMY_DATABASE_URI = DB_URI
 
