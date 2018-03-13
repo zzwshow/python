@@ -12,6 +12,7 @@ from .forms import LoginForm,ResetPwdForm
 from .models import CMSUser
 from .decorators import Login_Required
 from exts import db
+from utils import restful
 import config
 
 
@@ -78,13 +79,14 @@ class RestPwdView(views.MethodView):
 			if user.check_password(oldpwd):  #检查旧密码是否正确
 				user.password = newpwd
 				db.session.commit()
-				return jsonify({"code":200,"message":""})
+				return restful.success()
 			else:
-				return jsonify({"code":400,"message":"旧密码错误"})
+				return restful.parames_error("旧密码错误")
 
 		else:
-			message = form.get_error()   #获取表单验证器的错误提示
-			return jsonify({"code":400,"message":message})
+			# message = form.get_error()   #获取表单验证器的错误提示
+			# return jsonify({"code":400,"message":message})
+			return restful.parames_error(form.get_error())
 
 
 
