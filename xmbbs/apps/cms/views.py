@@ -7,12 +7,12 @@ from flask import (
     url_for,
     g
 )
-from .forms import LoginForm, ResetPwdForm
+from .forms import LoginForm,ResetPwdForm,RestEmailForm
 from .models import CMSUser
 from .decorators import Login_Required
 from exts import db, mail
 from flask_mail import Message
-from utils import restful
+from utils import restful,zlcache
 import config
 import string
 import random
@@ -86,7 +86,7 @@ class RestPwdView(views.MethodView):
             if user.check_password(oldpwd):  # 检查旧密码是否正确
                 user.password = newpwd
                 db.session.commit()
-                return restful.success()
+                return restful.success("邮箱修改成功")
             else:
                 return restful.parames_error("旧密码错误")
 
@@ -99,15 +99,21 @@ class RestPwdView(views.MethodView):
 ####修改邮箱
 class ResetEmailView(views.MethodView):
     decorators = [Login_Required]
-
     def get(self):
         return render_template('cms/cms_resetemail.html')
-
     def post(self):
-        pass
+        form = RestEmailForm(request.form)
+        if form.validate():
+            email = form.email.data
+            g.cms_user.email = email
+            db.session.commit()
+            return restful.success()
+        else:
+            return restful.parames_error(form.get_error())
 
 #发送邮件验证码
 @bp.route("/email_captcha/")
+@Login_Required
 def Email_captcha():
     email = request.args.get("email")
     if not email:
@@ -120,14 +126,16 @@ def Email_captcha():
         mail.send(message)
     except:
         return "服务器异常！"
+    #代码走到这里说明验证码已经发送成功了，将验证码写入到memecached中
+    zlcache.set(email,captcha) #email当做key, captcha是验证码
     return restful.success("验证码发送成功！")
 
 # 发送测试邮件
-@bp.route('/email/')
-def Send_mail():
-    message = Message("xmbbs邮件测试", recipients=["wei3511@126.com"], body="测试")
-    mail.send(message)
-    return "sucess"
+# @bp.route('/email/')
+# def Send_mail():
+#     message = Message("xmbbs邮件测试", recipients=["wei3511@126.com"], body="测试")
+#     mail.send(message)
+#     return "sucess"
 
 
 

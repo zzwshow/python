@@ -33,4 +33,37 @@ $(function () {
 
 });
 
+//使用ajax 提交用户修改邮箱的信息！
+$(function () {
+    $('#submit').click(function (event) {
+        event.preventDefault();
+        var emailE = $("input[name='email']");
+        var captchaE = $("input[name='captcha']");
 
+        var email = emailE.val();
+        var captcha = captchaE.val();
+
+        zlajax.post({
+            'url':'/cms/resetemail/',
+            'data':{
+                'email':email,
+                'captcha':captcha
+            },
+            'success':function (data) {
+                if (data['code']===200){
+                    zlalert.alertSuccessToast();
+
+                }else {
+                    zlalert.alertInfo(data[message]);
+                }
+            },
+            'fail':function (error) {
+                zlalert.alertNetworkError();
+
+            }
+
+        });
+
+    });
+
+});
