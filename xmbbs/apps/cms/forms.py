@@ -11,7 +11,7 @@ class LoginForm(BaseForm):
 
 #修改密码表单验证
 class ResetPwdForm(BaseForm):
-	oldpwd = StringField(validators=[Length(4,20,message="请输入正确格式的旧密码")])
-	newpwd = StringField(validators=[Length(4,20,message="请输入正确格式的新密码")])
-	newpwd2 = StringField(validators=[EqualTo("newpwd",message="新输入密码不一致！")])
+	oldpwd = StringField(validators=[Length(4,20,message="旧密码-格式错误！")])
+	newpwd = StringField(validators=[Length(4,20,message="新密码-格式错误！")])
+	newpwd2 = StringField(validators=[EqualTo("newpwd",message="两次密码不一致！")])
 
