@@ -89,6 +89,16 @@ class RestPwdView(views.MethodView):
 			return restful.parames_error(form.get_error())
 
 
+####修改邮箱
+class ResetEmailView(views.MethodView):
+	decorators = [Login_Required]
+	def get(self):
+		return render_template('cms/cms_resetemail.html')
+	def post(self):
+		pass
+
+
+
 
 
 
@@ -96,7 +106,8 @@ class RestPwdView(views.MethodView):
 bp.add_url_rule('/login/',view_func=LoginView.as_view('login'))
 ###修改密码
 bp.add_url_rule('/resetpwd/',view_func=RestPwdView.as_view('resetpwd'))
-
+####修改邮箱
+bp.add_url_rule('/resetemail/',view_func=ResetEmailView.as_view('resetemail'))
 
 
 
