@@ -1,6 +1,6 @@
 from flask import jsonify
 
-
+#用于接口返回错误或成功时的代码！接口为json格式！
 class HttpCode(object):
 	ok = 200
 	unauththerror =401

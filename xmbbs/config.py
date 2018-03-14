@@ -17,13 +17,13 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 CMS_USER_ID = "aaaa"
 
 #邮箱配置信息
-MAIL_SERVER : "smtp.126.com"
-MAIL_PORT : '587'
-MAIL_USE_TLS : True
-# MAIL_USE_SSL : default False
-MAIL_USERNAME : "wei3511@126.com"
-MAIL_PASSWORD : 'wei3525119'
-# MAIL_DEFAULT_SENDER : default None
+MAIL_SERVER = "smtp.qq.com"
+MAIL_PORT = '587'
+MAIL_USE_TLS = True
+# MAIL_USE_SSL = default False
+MAIL_USERNAME = "605882219@qq.com"
+MAIL_PASSWORD = 'srfayonbjolhbddd'
+MAIL_DEFAULT_SENDER = "605882219@qq.com"
 
 #TLS: 端口是：587
 #SSL：端口是：465
