@@ -11,7 +11,7 @@ from flask import (
 from .forms import LoginForm,ResetPwdForm
 from .models import CMSUser
 from .decorators import Login_Required
-from exts import db
+from exts import db,mail
 from utils import restful
 import config
 
