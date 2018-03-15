@@ -2,6 +2,38 @@ from exts import db
 from datetime import datetime
 from werkzeug.security import generate_password_hash,check_password_hash
 
+
+#权限管理
+class CMSPermission(object):
+	#所有权限
+	ALL_permission = 0b11111111
+	#访问者
+    VISITOR =        0b00000001
+	#管理帖子权限
+    POSTER =         0b00000010
+	#管理评论权限
+	COMMENTER =      0b00000100
+	#管理板块权限
+	BOARDER =        0b00001000
+	#管理前台用户权限
+	FRONTUSER =      0b00010000
+	#管理后台用户权限
+	CMSUSER =        0b00100000
+
+class CMSRole(db.Model):
+	__tablename__ = 'cms_role'
+	id = db.Column(db.Integer,primary_key=True,autoincrement=True)
+	name = db.Column(db.String(50),nullable=False)
+	desc = db.Column(db.String(200),nullable=True)
+	create_time = db.Column(db.DateTime,default=datetime.now)
+	permissions = db.Column(db.Integer,default=CMSPermission.VISITOR)
+
+
+
+
+
+
+
 class CMSUser(db.Model):
 	__tablename__ = "cms_user"
 	id = db.Column(db.Integer,primary_key=True,autoincrement=True)

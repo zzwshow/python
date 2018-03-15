@@ -26,7 +26,7 @@ class RestEmailForm(BaseForm):
 	def validate_email(self, field):
 		email = field.data
 		user = g.cms_user  # 获取当前登录用户信息，可从中获取当前邮箱地址
-		print(user.email)
+		# print(user.email)
 		if user.email == email:
 			raise ValidationError("不能修改为当前正在登录中的邮箱！")
 
