@@ -52,9 +52,11 @@ $(function () {
             'success':function (data) {
                 if (data['code']===200){
                     zlalert.alertSuccessToast();
+                    emailE.val('');
+                    captchaE.val('');
 
                 }else {
-                    zlalert.alertInfo(data[message]);
+                    zlalert.alertInfo(data["message"]);
                 }
             },
             'fail':function (error) {

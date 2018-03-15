@@ -20,7 +20,15 @@ class ResetPwdForm(BaseForm):
 #修改邮箱表单验证
 class RestEmailForm(BaseForm):
 	email = StringField(validators=[Email(message="您输入的邮箱格式不正确！")])
-	captcha = StringField(validators=[Length(min=8,max=8,message="请输入正确长度的验证码")])
+	captcha = StringField(validators=[Length(min=4,max=4,message="请输入正确的验证码")])
+
+	# 验证邮箱是否和当前登录邮箱一直
+	def validate_email(self, field):
+		email = field.data
+		user = g.cms_user  # 获取当前登录用户信息，可从中获取当前邮箱地址
+		print(user.email)
+		if user.email == email:
+			raise ValidationError("不能修改为当前正在登录中的邮箱！")
 
 	#定义一个验证码效验方法
 	def validate_captcha(self,field):
@@ -31,13 +39,7 @@ class RestEmailForm(BaseForm):
 		if not captcha_cache or captcha.lower() != captcha_cache.lower(): #不区分用户传过来的大小写
 			raise ValidationError("邮箱验证码错误")
 
-	#验证邮箱是否和当前登录邮箱一直
-	def validate_email(self,field):
-		email = field.data
-		user = g.cms_user  #获取当前登录用户信息，可从中获取当前邮箱地址
-		print(user.email)
-		if user.email == email:
-			raise ValidationError("不能修改为当前正在登录中的邮箱！")
+
 
 
 

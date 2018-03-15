@@ -7,7 +7,7 @@ class HttpCode(object):
 	paramserror = 400
 	servererror = 500
 
-def restful_result(code,message,data):
+def restful_result(code,message,data):  #这是个基础方法
 	return jsonify({"code":code,"message":message,"data":data or {}})
 
 def success(message="",data=None):   #成功信息

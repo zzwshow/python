@@ -115,12 +115,13 @@ class ResetEmailView(views.MethodView):
 @bp.route("/email_captcha/")
 @Login_Required
 def Email_captcha():
+
     email = request.args.get("email")
     if not email:
         return restful.parames_error("请输入邮箱地址！")
     source =  list(string.ascii_letters)
     source.extend(map(lambda x:str(x),range(0,10)))
-    captcha = "".join(random.sample(source,8))       #生成8为的随机字符当做验证码
+    captcha = "".join(random.sample(source,4))       #生成8为的随机字符当做验证码
     message = Message("xmbbs邮箱验证码",recipients=[email],body='您的验证码是：%s' % captcha)
     try:
         mail.send(message)
