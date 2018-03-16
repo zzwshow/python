@@ -14,7 +14,8 @@ Migrate(app,db)          #关联app于db
 
 manager.add_command('db',MigrateCommand)  #将MigrateCommond (包含很多迁移子命令)绑定给db
 
-@manager.option('-u','--username',dest='username')   #命令行添加用户！
+#定义命令-添加用户！
+@manager.option('-u','--username',dest='username')
 @manager.option('-p','--password',dest='password')
 @manager.option('-e','--email',dest='email')
 def create_cms_user(username,password,email):
